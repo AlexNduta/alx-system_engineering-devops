@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+#prints "Best school" ten times but 'Hi' on the 9th iteration
+
+myvar=1
+while [ $myvar -le 10 ]
+do
+    echo "Best School"
+    myvar=$((myvar+1))
+    if [ $myvar -eq 9 ]
+    then
+        echo "Hi"
+    fi
+done
