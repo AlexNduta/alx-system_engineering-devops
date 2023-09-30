@@ -2,7 +2,7 @@
 #the code prints out "Best School" ten times using thye until loop
 
 myvar=1
-until [ $myvar -le 10 ]
+until [ $myvar -eq 10 ]
 do
     myvar=$((myvar+1))
     echo "Best School"
