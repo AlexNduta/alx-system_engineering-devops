@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+#displays 1-20, display "4: Bad luck from china", "9: bad luck from japan", "17: bad luck from Italy"
+
+mynum=1
+while [ $mynum -le 20 ]
+do
+    case $mynum in
+        4)
+            echo "$mynum"
+            echo "bad luck from China"
+            ;;
+        9)
+            echo "$mynum"
+            echo "bad luck from Japan"
+            ;;
+        17)
+            echo "$mynum"
+            echo "bad luck from Italy"
+            ;;
+         *)
+            echo "$mynum"
+    esac
+    mynum=$((mynum+1))
+done
+
