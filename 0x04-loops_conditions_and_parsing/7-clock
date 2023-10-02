@@ -4,10 +4,9 @@
 Hour=0
 while [ $Hour -le 12 ]
 do
-    mins=0
-    #counter=$((counter+1))
-
+    
     echo "Hour:$Hour"
+    mins=1
     while [ $mins -le 59 ]
     do
         echo "$mins"
