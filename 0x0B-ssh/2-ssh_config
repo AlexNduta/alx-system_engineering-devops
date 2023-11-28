@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# configfile
+
+Host 3.84.238.201
+    PasswordAuthentication no
+    IdentityFile ~/.ssh/school
