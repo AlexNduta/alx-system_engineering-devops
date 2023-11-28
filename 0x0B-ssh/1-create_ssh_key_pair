@@ -3,4 +3,4 @@
 #name of the created privated key must be school
 #key must be protected by the passphrase 'betty'
 
-ssh-keygen -b 4096 -f ~/.ssh/school -p "betty"
+ssh-keygen -b 4096 -f school -N "betty"
