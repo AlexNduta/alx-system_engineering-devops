@@ -4,10 +4,8 @@
 # configur the default config file to listen to port 80
 # making a http query should return 'hello world'
 
-sudo su
-apt install -y nginx
-apt get update -y
+sudo apt install -y nginx
+sudo apt get update
 echo 'Hello world' > /var/www/html/index.nginx-debian.html
 service nginx start
-exit
 
