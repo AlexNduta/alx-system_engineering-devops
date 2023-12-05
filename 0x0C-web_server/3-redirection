@@ -15,7 +15,7 @@ touch /etc/nginx/html/index.html
 echo "Hello world" > /etc/nginx/html/index.html
 
 # create a redirect
-echo "sever {
+echo "server {
     listen 80;
     root etc/nginx/html;
     index index.html index.htm;
