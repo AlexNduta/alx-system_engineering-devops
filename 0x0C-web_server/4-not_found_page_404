@@ -4,7 +4,9 @@
 apt-get update
 apt install -y nginx
 mkdir /etc/nginx/html
+touc /etc/nginx/html/index.html
 echo "Hello Alex" > /etc/nginx/html/index.html
+touch /etc/nginx/html/404.html
 echo "Ceci n'est pas une page" > /etc/nginx/html/404.html
 
 echo "server{
