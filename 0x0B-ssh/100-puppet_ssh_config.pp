@@ -7,6 +7,6 @@ file ('/home/was/.ssh/ssh_config'):
     content =>"
     Host 54.174.27.176,
     IdentityFile ~/.ssh/school/
-    PasswordAuthetication no
+    PasswordAuthentication no
     ",
 }
