@@ -18,7 +18,7 @@ echo "server{
         internal;
     }
 }
-" >> /etc/nginx/sites-availble/default
+" >> /etc/nginx/sites-available/default
 
 service nginx restart
 
