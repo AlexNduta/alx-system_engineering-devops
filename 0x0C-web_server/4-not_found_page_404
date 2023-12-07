@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# make a page return a 404 containing a string
+
+apt-get update
+apt install -y nginx
+mkdir /etc/nginx/html
+echo "
+    <h1>Ceci n'est pas une page</h1>
+" > /etc/nginx/html/404.html
+
+echo "server{
+    listen 80;
+    root /etc/nginx/html;
+    index 404.html;
+    location =/404.html{
+        root /etc/nginx/html;
+        internal;
+    }
+}
+" >> /etc/nginx/sites-availble/default
+
+service nginx restart
+
+
