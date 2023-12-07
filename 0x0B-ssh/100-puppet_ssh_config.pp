@@ -1,5 +1,5 @@
 # configure to use a specific private key and signin without password
-file ('/home/was/.ssh/config'):
+file ('/home/was/.ssh/ssh_config'):
     ensure => 'file',
     owner => 'ubuntu',
     group => 'ubuntu',
