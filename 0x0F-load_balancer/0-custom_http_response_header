@@ -40,10 +40,9 @@ printf %s "server{
         root $web_root;
         internal;
     }
+    add_header X-Served-By \$hostname;
 }" >> $connfig_dir
 
-# add a custom header
-echo "add_header X-Served-By $hostname" | tee -a $connfig_dir
 #restart nginx to adopt the changes
 sudo service nginx start
 
