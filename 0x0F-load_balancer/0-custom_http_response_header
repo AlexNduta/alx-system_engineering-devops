@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+# makes web02 and web02 similar
+# creates a custom header
+
+web_root="/usr/share/nginx/html"
+# install nginx if not present
+apt-get update
+apt-get install -y nginx
+
+# restart nginx after install
+sudo service  nginx restart
+
+#create a html file that is served by nginx running on port 80
+echo "Hello world" > /usr/share/nginx/html/index.html
+
+#create a redirect
+printf %s "server{
+    listen 80;
+    root $web_root;
+    index index.html index.htm;
+    location /redirect_me{
+        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+    }
+}" >> /etc/nginx/sites-available/default
+
+#creating a 404 redirect page
+echo "Ceci n'est pas une page" > /usr/share/nginx/html/custom_404.html
+
+printf %s "server{
+    listen 80;
+    root $web_root;
+    index index.html index.htm;
+    location /redirect_me{
+        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+    }
+    error_page 404 /custom_404.html;
+    location / 404 {
+        root $web_root;
+        internal;
+    }
+}" >> /etc/nginx/sites-available/default
+
+
+#restart nginx to adopt the changes
+sudo service nginx start
+
