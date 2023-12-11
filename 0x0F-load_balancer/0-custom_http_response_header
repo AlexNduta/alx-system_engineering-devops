@@ -3,6 +3,8 @@
 # creates a custom header
 
 web_root="/usr/share/nginx/html"
+connfig_dir="/etc/nginx/sites-available/default"
+
 # install nginx if not present
 apt-get update
 apt-get install -y nginx
@@ -21,7 +23,7 @@ printf %s "server{
     location /redirect_me{
         return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
     }
-}" >> /etc/nginx/sites-available/default
+}" >> $connfig_dir
 
 #creating a 404 redirect page
 echo "Ceci n'est pas une page" > /usr/share/nginx/html/custom_404.html
@@ -38,9 +40,10 @@ printf %s "server{
         root $web_root;
         internal;
     }
-}" >> /etc/nginx/sites-available/default
+}" >> $connfig_dir
 
-
+# add a custom header
+echo "add_header X-Served-By $hostname" | tee -a $connfig_dir
 #restart nginx to adopt the changes
 sudo service nginx start
 
