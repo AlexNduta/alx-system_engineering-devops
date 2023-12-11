@@ -1,15 +1,22 @@
 #!/usr/bin/env bash
-# Configure Nginx so that its HTTP response contains a custom header
-# HTTP response contains a custom header (on web-01 and web-02)
-var=$(hostname)
-new_string="error_page 404 \/custom_404.html;\n location \/redirect_me {\n return 301 \$scheme:\/\/www.google.com;"
-new_string2="server {\n\tadd_header X-Served-By $var;"
+# makes web02 and web02 similar
+# creates a custom header
 
-apt-get update -y
-apt-get install nginx -y
-echo "Hello World!" > /usr/share/nginx/html/index.html
-mkdir -p /var/www/html
-echo "Ceci n'est pas une page" > /var/www/html/custom_404.html
-sudo sed -i -E "s/^[^#]+location \/ \{/$new_string/" /etc/nginx/sites-available/default
-sudo sed -i -E "s/^server \{/$new_string2/" /etc/nginx/sites-available/default
+web_root="/usr/share/nginx/html"
+connfig_dir="/etc/nginx/sites-available/default"
+redirect_url="https://www.youtube.com/watch?v=QH2-TGUlwu4"
+setup="\troot $web_root;\n\tindex index.html index.htm;\n\tlocation /redirect_me{\n\t\treturn 301 $redirect_url;\n\t}\n\terror_page 404 /custom_404;\n\tlocation /404{\n\troot $web_root;\n\tinternal;\n\t}\n\tadd_header X-Served-By \$hostname;\n}"
+# install nginx if not present
+apt-get update
+apt-get install -y nginx
+
+# restart nginx after install
 sudo service nginx start
+
+#create a html file that is served by nginx running on port 80
+echo "Hello world" > /usr/share/nginx/html/index.html
+echo "Ceci n'est pas une page" > /usr/share/nginx/html/custom_404.html
+sed -i "/listen 80;/a $setup" "$connfig_dir"
+
+sudo service nginx restart
+
