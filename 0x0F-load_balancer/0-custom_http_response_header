@@ -12,26 +12,26 @@ apt-get install -y nginx
 sudo service nginx restart
 
 # Create an HTML file served by Nginx on port 80
-echo "Hello world" > "$web_root/index.html"
+echo "Hello Earthlings" > "$web_root/index.html"
 
 # Create a redirect
 # Creating a custom 404 page
 echo "Ceci n'est pas une page" > "$web_root/custom_404.html"
 
-printf '%s' 'server {
+printf "%s" "server {
     listen 80;
     root /var/www/html;
     index index.html index.htm;
     location /redirect_me {
-        return 301 "https://www.youtube.com/watch?v=QH2-TGUlwu4";
+        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
     }
     error_page 404 /custom_404.html;
     location /404 {
         root /var/www/html;
         internal;
     }
-    add_header X-Served-By $hostname;
-}' >> "$config_dir"
+    add_header X-Served-By $(hostname);
+}" > "$config_dir"
 
 # Restart Nginx to adopt the changes
 sudo service nginx restart
