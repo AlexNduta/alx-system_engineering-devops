@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# install HAproxy
+# configure HAproxy to distribute load between web01 and web02
+# Use round robin algorithm
+#Make sure its managed by an init script
+#Make sure your severs are configured with the correct hostnames
+
+# enable decated PPA
+apt-get install --no-install-recommends software-properties-common
+add-apt-repository ppa:vbernat/haproxy-2.8
+
+#install the package
+apt-get install haproxy=2.8.\*
+
+apt update && apt upgrade -y
+
+# HAproxy configuration
+echo "
+defaults
+    timeout client 10s
+    timeout sever 5s
+    timeout connect 5s
+    timeout http-request 10s
+frontend myfrontend
+    bind :80
+backend mybackend
+    server 5337569-web-01 4.157.155.107:80
+    server 337569-web-02 54.174.27.176:80
+" > /etc/haproxy/haproxy.cfg
+sudo service restart haproxy
