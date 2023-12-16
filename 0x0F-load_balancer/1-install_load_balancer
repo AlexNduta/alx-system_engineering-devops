@@ -14,17 +14,17 @@ apt-get install haproxy=2.8.\*
 
 apt update && apt upgrade -y
 
+#backup the original file
+mv /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.backup
 # HAproxy configuration
 echo "
-defaults
-    timeout client 10s
-    timeout server 5s
-    timeout connect 5s
-    timeout http-request 10s
-frontend myfrontend
+listen appname
     bind :80
-backend mybackend
-    server $(hostname) 4.157.155.107:80
-    server $(hostname) 54.174.27.176:80
+    mode http
+    balance roundrobin
+    option httpclose
+    option httpforwardfor
+    server 337569-web-01 54.157.155.107 check
+    server 337569-web-02 54.174.27.176 check
 " > /etc/haproxy/haproxy.cfg
 sudo service haproxy restart
