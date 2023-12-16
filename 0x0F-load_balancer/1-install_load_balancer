@@ -18,13 +18,13 @@ apt update && apt upgrade -y
 echo "
 defaults
     timeout client 10s
-    timeout sever 5s
+    timeout server 5s
     timeout connect 5s
     timeout http-request 10s
 frontend myfrontend
     bind :80
 backend mybackend
-    server 5337569-web-01 4.157.155.107:80
-    server 337569-web-02 54.174.27.176:80
+    server $(hostname) 4.157.155.107:80
+    server $(hostname) 54.174.27.176:80
 " > /etc/haproxy/haproxy.cfg
-sudo service restart haproxy
+sudo service haproxy restart
