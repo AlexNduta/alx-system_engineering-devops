@@ -3,8 +3,7 @@
 
 # install
 sudo apt install ufw -y
-sudo apt update
-
+sudo sed -i "s/IPV6=no/IPV6=yes/" /etc/default/ufw
 #disable the firewall
 sudo ufw diable
 
