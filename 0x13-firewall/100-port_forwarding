@@ -17,7 +17,7 @@ sudo ufw allow ssh
 sudo ufw allow https
 sudo ufw allow http
 
-sed -i/*filter/ $frwd/ /etc/ufw/before.rules
+sed -i"/\*filter/ i$frwd" /etc/ufw/before.rules
 
 #enable the firewall
 sudo ufw enable
