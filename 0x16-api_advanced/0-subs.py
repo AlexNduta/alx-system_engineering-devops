@@ -3,13 +3,17 @@
     -if an invalid subredit is given, return 0
 """
 import requests
-
+import sys
 
 def number_of_subscribers(subreddit):
     """ return number of subscribers in a given subreddit"""
     url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
     rq = requests.get(url).json()
-    subscriber = rq.get('data', {}).get('subscriber')
-    if not subscriber:
+    subscribers = rq.get('data', {}).get('subscribers')
+    if not subscribers:
         return 0
-    return subscriber
+    return subscribers
+
+if __name__ == '__main__':
+    result = number_of_subscribers(sys.argv[1])
+    print(result)
