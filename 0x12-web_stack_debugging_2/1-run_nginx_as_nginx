@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+# make sure that nginx is running on the current user.
+
+# declare varibales
+nginx_user="nginx"
+nginx_port="8080"
+
+# get the recent user
+#current user = "ps aux| grep nginx|awk '{print $1}'"
+
+# change the user to nginx
+sed -i 's/^user [^;]*;/user $nginx_user;/' /etc/nginx/nginx.conf
+
+# change ownership of relevant directories
+chown -R  $nginx_user:$nginx_user /var/log/nginx /var/lib/nginx
+
+# change port nginx is listening to
+sed -i 's/listen 80;/listen$nginx_port;/' /etc/nginx/nginx.conf
+
+sudo nginx -s reload
