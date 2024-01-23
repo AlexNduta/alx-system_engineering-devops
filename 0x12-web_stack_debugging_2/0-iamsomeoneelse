@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 #swicth a user and use whoami to confirm
 user="$1"
-sudo su "$user"
-
-whoami
+sudo -u "$user" whoami
 
 
