@@ -3,8 +3,8 @@
 # make sure that nginx is running on the current user.
 
 # declare varibales
-nginx_user="nginx"
-nginx_port="8080"
+#nginx_user="nginx"
+#nginx_port="8080"
 
 # get the recent user
 #current user = "ps aux| grep nginx|awk '{print $1}'"
@@ -13,9 +13,10 @@ nginx_port="8080"
 sudo sed -i 's/#user www-data/user $nginx_user/' /etc/nginx/nginx.conf
 
 # change ownership of relevant directories
-chown -R  $nginx_user:$nginx_user /var/log/nginx /var/lib/nginx
+chmod 700 /etc/nginx/nginx.conf
+chown nginx:nginx /etc/nginx/nginx.conf
 
 # change port nginx is listening to
-sudo sed -i 's/listen 80;/listen$nginx_port;/' /etc/nginx/nginx.conf
+sudo sed -i 's/80 defaul_server;/8080 default_server/' /etc/nginx/sites-available/default
 
 sudo nginx -s reload
