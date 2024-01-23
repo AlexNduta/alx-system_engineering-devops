@@ -2,9 +2,6 @@
 #check why nginx is not listening to port 80
 
 sudo ufw allow 80
-
-text="server {\n\tlisten 80 default_server;\n\tlisten[::]:80 default_server;\n\troot /var/www/html;\n\tserver_name _;}"
-
-printf "%s" "$text" > /etc/nginx/sites-available/default
+sudo sed -i "s/sites-enabled/sites-available/" /etc/nginx/nginx.conf
 
 sudo service nginx restart
