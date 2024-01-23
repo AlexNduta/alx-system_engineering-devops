@@ -6,3 +6,5 @@ sudo ufw allow 80
 #text="server {\n\tlisten 80 default_server;\n\tlisten[::]:80 default_server;\n\    troot /var/www/html;\n\tserver_name _;\n\tlocation / {\n\t\ttry_files $uri $uri    / =404;}"
 
 #printf "%s" "$text" > /etc/nginx/sites-available/default
+
+sudo service nginx restart
